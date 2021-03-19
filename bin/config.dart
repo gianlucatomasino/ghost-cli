@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 
 class Config {
-  String contentKey;
+  final String contentKey;
+  final Uri endpoint;
 
-  Config(this.contentKey);
+  Config(this.contentKey, this.endpoint);
 
   factory Config.loadFromFile(String path) {
-    var keys = jsonDecode(File(path).readAsStringSync());
-    return Config(keys['content_key']);
+    final keys = jsonDecode(File(path).readAsStringSync());
+    Uri endpoint = Uri.parse(keys['endpoint']);
+
+    return Config(keys['content_key'], endpoint);
   }
 }

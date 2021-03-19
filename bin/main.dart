@@ -1,7 +1,9 @@
-import 'options.dart';
+import 'ghost_cli_runner.dart';
+import 'command/post.dart';
 
 void main(List<String> args) {
-  Options opts = Options.fromArgs(args);
+  final runner = GhostCliRunner();
+  runner.addCommand(PostCommand());
 
-  print(opts.getValue('config'));
+  runner.run(args);
 }
